@@ -1,4 +1,4 @@
-# Adere-m# Adere Market
+Adere Market
 
 A small demo storefront for a local produce market in Mekelle — browse products by category and add items to a basket. Pure HTML/CSS/JS, no build step, so it deploys straight to GitHub Pages.
 
