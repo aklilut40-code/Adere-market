@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adere Market — Fresh from Mekelle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F6EFE1;
+    --paper: #FFFCF6;
+    --ink: #2A1E14;
+    --ink-soft: #6B5C4B;
+    --spice: #A34E1C;
+    --spice-dark: #7C3A14;
+    --herb: #4F6B45;
+    --line: #E3D6BE;
+    --radius: 6px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Work Sans',sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--ink);
+    line-height:1.1;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+  /* Header */
+  header{
+    position:sticky;top:0;z-index:20;
+    background:rgba(246,239,225,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 0;
+  }
+  .brand{
+    font-family:'Fraunces',serif;font-weight:700;font-size:22px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--spice);display:inline-block;}
+  .nav-links{display:flex;gap:28px;font-size:14px;list-style:none;}
+  .nav-links a{text-decoration:none;color:var(--ink-soft);border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .15s;}
+  .nav-links a:hover{border-color:var(--spice);color:var(--ink);}
+  .cart-btn{
+    background:var(--ink);color:var(--paper);border:none;
+    padding:9px 16px;border-radius:var(--radius);font-size:14px;font-weight:500;
+    cursor:pointer;display:flex;align-items:center;gap:8px;
+  }
+  .cart-count{
+    background:var(--spice);color:#fff;border-radius:50%;
+    width:18px;height:18px;font-size:11px;display:flex;align-items:center;justify-content:center;
+  }
+  .menu-toggle{display:none;background:none;border:none;font-size:22px;cursor:pointer;color:var(--ink);}
+
+  /* Hero */
+  .hero{padding:72px 0 56px;}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center;}
+  .eyebrow{color:var(--herb);font-size:14px;font-weight:500;margin-bottom:14px;}
+  .hero h1{font-size:52px;letter-spacing:-0.01em;margin-bottom:20px;}
+  .hero p{color:var(--ink-soft);font-size:17px;max-width:44ch;margin-bottom:28px;}
+  .hero-actions{display:flex;gap:14px;}
+  .btn-primary{
+    background:var(--spice);color:#fff;border:none;
+    padding:13px 24px;border-radius:var(--radius);font-size:15px;font-weight:500;
+    cursor:pointer;text-decoration:none;display:inline-block;
+  }
+  .btn-primary:hover{background:var(--spice-dark);}
+  .btn-ghost{
+    border:1px solid var(--ink);color:var(--ink);background:none;
+    padding:13px 24px;border-radius:var(--radius);font-size:15px;font-weight:500;
+    cursor:pointer;text-decoration:none;display:inline-block;
+  }
+  .hero-visual{
+    background:var(--paper);border:1px solid var(--line);border-radius:14px;
+    padding:28px;position:relative;
+  }
+  .basket-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px dashed var(--line);font-size:14px;}
+  .basket-row:last-child{border-bottom:none;}
+  .basket-row .name{font-weight:500;}
+  .basket-row .price{color:var(--ink-soft);}
+  .stat-strip{display:flex;justify-content:space-between;margin-top:20px;padding-top:20px;border-top:1px solid var(--line);}
+  .stat b{font-family:'Fraunces',serif;font-size:22px;display:block;}
+  .stat span{font-size:12px;color:var(--ink-soft);}
+
+  /* Categories */
+  .categories{padding:8px 0 48px;}
+  .cat-row{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;}
+  .cat-chip{
+    flex-shrink:0;border:1px solid var(--line);background:var(--paper);
+    padding:9px 18px;border-radius:999px;font-size:14px;cursor:pointer;white-space:nowrap;
+  }
+  .cat-chip.active{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+
+  /* Products */
+  .section-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:24px;}
+  .section-head h2{font-size:30px;}
+  .products{padding:8px 0 64px;}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .card{
+    background:var(--paper);border:1px solid var(--line);border-radius:10px;
+    overflow:hidden;display:flex;flex-direction:column;
+  }
+  .card-img{
+    height:150px;display:flex;align-items:center;justify-content:center;
+    font-size:44px;background:linear-gradient(160deg,#EFE3CB,#F6EFE1);
+  }
+  .card-body{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1;}
+  .card-body h3{font-size:17px;}
+  .card-body .desc{color:var(--ink-soft);font-size:13px;flex:1;}
+  .card-foot{display:flex;justify-content:space-between;align-items:center;margin-top:8px;}
+  .price{font-family:'Fraunces',serif;font-weight:600;font-size:18px;}
+  .add-btn{
+    background:none;border:1px solid var(--ink);color:var(--ink);
+    width:34px;height:34px;border-radius:50%;font-size:18px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .add-btn:hover{background:var(--ink);color:var(--paper);}
+
+  /* About strip */
+  .about{background:var(--ink);color:var(--paper);padding:64px 0;}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+  .about h2{color:var(--paper);font-size:30px;margin-bottom:14px;}
+  .about p{color:#D8CCB9;font-size:15px;max-width:48ch;}
+  .about-figures{display:flex;gap:36px;}
+  .about-figures .stat b{color:var(--paper);}
+  .about-figures .stat span{color:#B7A98D;}
+
+  /* Footer */
+  footer{padding:48px 0;border-top:1px solid var(--line);}
+  .foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;}
+  .foot-brand{font-family:'Fraunces',serif;font-size:18px;font-weight:600;}
+  .foot-links{display:flex;gap:22px;list-style:none;font-size:14px;color:var(--ink-soft);}
+  .foot-links a{text-decoration:none;}
+  .foot-links a:hover{color:var(--spice);}
+  .foot-bottom{margin-top:28px;font-size:13px;color:var(--ink-soft);}
+
+  /* Cart drawer */
+  .drawer-backdrop{
+    position:fixed;inset:0;background:rgba(42,30,20,0.4);
+    display:none;z-index:30;
+  }
+  .drawer-backdrop.open{display:block;}
+  .drawer{
+    position:fixed;top:0;right:0;bottom:0;width:340px;max-width:88vw;
+    background:var(--paper);z-index:31;transform:translateX(100%);
+    transition:transform .25s ease;padding:24px;display:flex;flex-direction:column;
+  }
+  .drawer.open{transform:translateX(0);}
+  .drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+  .drawer-close{background:none;border:none;font-size:20px;cursor:pointer;}
+  #drawer-items{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:14px;}
+  .drawer-item{display:flex;justify-content:space-between;font-size:14px;border-bottom:1px solid var(--line);padding-bottom:12px;}
+  .drawer-empty{color:var(--ink-soft);font-size:14px;margin-top:8px;}
+  .drawer-total{display:flex;justify-content:space-between;font-family:'Fraunces',serif;font-size:19px;font-weight:600;padding-top:16px;border-top:1px solid var(--line);margin-top:14px;}
+
+  @media (max-width: 860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero h1{font-size:38px;}
+    .about-grid{grid-template-columns:1fr;}
+    .grid{grid-template-columns:repeat(2,1fr);}
+    .nav-links{display:none;}
+  }
+  @media (max-width: 520px){
+    .grid{grid-template-columns:1fr;}
+    .hero h1{font-size:32px;}
+    .hero-actions{flex-direction:column;}
+    .about-figures{flex-wrap:wrap;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand"><span class="dot"></span>Adere Market</div>
+    <ul class="nav-links">
+      <li><a href="#produce">Produce</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="cart-btn" id="cart-open">Basket <span class="cart-count" id="cart-count">0</span></button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Mekelle, Tigray</div>
+      <h1>Vegetables picked this morning, priced fairly.</h1>
+      <p>Adere Market connects small growers around Mekelle directly with your kitchen. No middlemen, no wilting produce — just what came off the farm today.</p>
+      <div class="hero-actions">
+        <a href="#produce" class="btn-primary">Browse today's produce</a>
+        <a href="#about" class="btn-ghost">How it works</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="basket-row"><span class="name">Injera wheat, 5kg</span><span class="price">220 birr</span></div>
+      <div class="basket-row"><span class="name">Shiro powder, 1kg</span><span class="price">180 birr</span></div>
+      <div class="basket-row"><span class="name">Fresh tomatoes, 2kg</span><span class="price">90 birr</span></div>
+      <div class="stat-strip">
+        <div class="stat"><b>34</b><span>Growers</span></div>
+        <div class="stat"><b>6am</b><span>Market opens</span></div>
+        <div class="stat"><b>2hr</b><span>Farm to door</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="categories wrap">
+  <div class="cat-row" id="cat-row">
+    <button class="cat-chip active" data-cat="all">All</button>
+    <button class="cat-chip" data-cat="vegetables">Vegetables</button>
+    <button class="cat-chip" data-cat="grains">Grains</button>
+    <button class="cat-chip" data-cat="spices">Spices</button>
+    <button class="cat-chip" data-cat="dairy">Dairy</button>
+  </div>
+</section>
+
+<section class="products wrap" id="produce">
+  <div class="section-head">
+    <h2>Today's produce</h2>
+  </div>
+  <div class="grid" id="product-grid"></div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div>
+      <h2>Grown nearby, sold the same day</h2>
+      <p>Every listing comes from a farm within an hour of Mekelle. Growers set their own prices, and Adere Market takes a small flat fee instead of marking up produce — so more of what you pay reaches the people who grew it.</p>
+    </div>
+    <div class="about-figures">
+      <div class="stat"><b>18%</b><span>More income to growers</span></div>
+      <div class="stat"><b>500+</b><span>Households served weekly</span></div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap foot-grid">
+    <div class="foot-brand">Adere Market</div>
+    <ul class="foot-links">
+      <li><a href="mailto:hello@aderemarket.com">hello@aderemarket.com</a></li>
+      <li><a href="#produce">Produce</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </div>
+  <div class="wrap foot-bottom">Adere Market, Mekelle. Built as a demo storefront.</div>
+</footer>
+
+<div class="drawer-backdrop" id="drawer-backdrop"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3>Your basket</h3>
+    <button class="drawer-close" id="drawer-close">&times;</button>
+  </div>
+  <div id="drawer-items"><p class="drawer-empty">Nothing in your basket yet.</p></div>
+  <div class="drawer-total"><span>Total</span><span id="drawer-total">0 birr</span></div>
+</div>
+
+<script>
+  const products = [
+    {id:1, name:"Fresh tomatoes", cat:"vegetables", price:45, unit:"kg", icon:"🍅"},
+    {id:2, name:"Red onions", cat:"vegetables", price:38, unit:"kg", icon:"🧅"},
+    {id:3, name:"Ethiopian cabbage", cat:"vegetables", price:25, unit:"head", icon:"🥬"},
+    {id:4, name:"Teff, white", cat:"grains", price:210, unit:"5kg", icon:"🌾"},
+    {id:5, name:"Injera wheat flour", cat:"grains", price:220, unit:"5kg", icon:"🌾"},
+    {id:6, name:"Roasted barley", cat:"grains", price:95, unit:"kg", icon:"🌾"},
+    {id:7, name:"Berbere spice mix", cat:"spices", price:150, unit:"500g", icon:"🌶️"},
+    {id:8, name:"Shiro powder", cat:"spices", price:180, unit:"kg", icon:"🫘"},
+    {id:9, name:"Mitmita", cat:"spices", price:130, unit:"250g", icon:"🌶️"},
+    {id:10, name:"Fresh ayib cheese", cat:"dairy", price:70, unit:"500g", icon:"🧀"},
+    {id:11, name:"Farm butter, spiced", cat:"dairy", price:160, unit:"kg", icon:"🧈"},
+    {id:12, name:"Whole milk", cat:"dairy", price:35, unit:"litre", icon:"🥛"},
+  ];
+
+  const grid = document.getElementById('product-grid');
+  const catRow = document.getElementById('cat-row');
+  let activeCat = 'all';
+  let cart = {};
+
+  function renderGrid(){
+    grid.innerHTML = '';
+    products
+      .filter(p => activeCat === 'all' || p.cat === activeCat)
+      .forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="card-img">${p.icon}</div>
+          <div class="card-body">
+            <h3>${p.name}</h3>
+            <p class="desc">Per ${p.unit}, from a grower near Mekelle.</p>
+            <div class="card-foot">
+              <span class="price">${p.price} birr</span>
+              <button class="add-btn" data-id="${p.id}" aria-label="Add ${p.name} to basket">+</button>
+            </div>
+          </div>`;
+        grid.appendChild(card);
+      });
+  }
+
+  catRow.addEventListener('click', e => {
+    const chip = e.target.closest('.cat-chip');
+    if(!chip) return;
+    document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    activeCat = chip.dataset.cat;
+    renderGrid();
+  });
+
+  grid.addEventListener('click', e => {
+    const btn = e.target.closest('.add-btn');
+    if(!btn) return;
+    const id = Number(btn.dataset.id);
+    cart[id] = (cart[id] || 0) + 1;
+    updateCart();
+  });
+
+  function updateCart(){
+    const count = Object.values(cart).reduce((a,b) => a+b, 0);
+    document.getElementById('cart-count').textContent = count;
+
+    const itemsEl = document.getElementById('drawer-items');
+    const ids = Object.keys(cart);
+    if(ids.length === 0){
+      itemsEl.innerHTML = '<p class="drawer-empty">Nothing in your basket yet.</p>';
+    } else {
+      itemsEl.innerHTML = ids.map(id => {
+        const p = products.find(p => p.id === Number(id));
+        const qty = cart[id];
+        return `<div class="drawer-item"><span>${p.name} × ${qty}</span><span>${p.price * qty} birr</span></div>`;
+      }).join('');
+    }
+    const total = ids.reduce((sum,id) => {
+      const p = products.find(p => p.id === Number(id));
+      return sum + p.price * cart[id];
+    }, 0);
+    document.getElementById('drawer-total').textContent = total + ' birr';
+  }
+
+  const drawer = document.getElementById('drawer');
+  const backdrop = document.getElementById('drawer-backdrop');
+  document.getElementById('cart-open').addEventListener('click', () => {
+    drawer.classList.add('open');
+    backdrop.classList.add('open');
+  });
+  function closeDrawer(){
+    drawer.classList.remove('open');
+    backdrop.classList.remove('open');
+  }
+  document.getElementById('drawer-close').addEventListener('click', closeDrawer);
+  backdrop.addEventListener('click', closeDrawer);
+
+  renderGrid();
+</script>
+
+</body>
+</html>
